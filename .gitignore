@@ -1,0 +1,6 @@
+# Lead data - never share or commit these
+input/
+runs/
+output/
+*.tmp
+__pycache__/

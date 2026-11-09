@@ -1,0 +1,120 @@
+{
+  "_readme": "Settings for the /prospect skill. Edit and save; the next run uses them. Keys starting with _ are comments.",
+
+  "input_columns": {
+    "_help": "Leave these blank to auto-detect from the scraper file's headers. To force one, put the exact header text, e.g. \"business_name\": \"title\".",
+    "business_name": "",
+    "address": "",
+    "city": "",
+    "phone": "",
+    "website": "",
+    "category": "",
+    "status": "",
+    "rating": "",
+    "reviews": "",
+    "place_id": "",
+    "maps_url": "",
+    "emails": "",
+    "query": ""
+  },
+
+  "filters": {
+    "_help": "Applied in this order. Every dropped row is listed with its reason on the 'Filtered out' tab. Rows are never sorted.",
+    "drop_if_no_name": true,
+    "drop_permanently_closed": true,
+    "drop_temporarily_closed": false,
+    "drop_if_no_website_and_no_phone": false,
+    "exclude_if_category_contains": [],
+    "keep_only_if_category_contains": [],
+    "exclude_if_name_contains": [],
+    "min_reviews": null,
+    "min_rating": null,
+    "dedupe_on": ["place_id", "phone", "website_domain"],
+    "dedupe_ignore_domains": [
+      "facebook.com", "fb.com", "instagram.com", "linkedin.com", "twitter.com", "x.com", "tiktok.com",
+      "youtube.com", "google.com", "g.page", "business.site", "sites.google.com", "linktr.ee", "yelp.com",
+      "yell.com", "checkatrade.com", "bark.com", "mybuilder.com", "ratedpeople.com", "trustatrader.com",
+      "houzz.com", "houzz.co.uk", "thumbtack.com", "angi.com", "homeadvisor.com", "nextdoor.com",
+      "booksy.com", "fresha.com", "treatwell.co.uk", "setmore.com", "square.site", "wa.me", "bit.ly"
+    ]
+  },
+
+  "research": {
+    "_help": "parallel_agents = how many businesses are researched at once. max_attempts_per_row = retries before a row is flagged for manual research.",
+    "parallel_agents": 8,
+    "max_attempts_per_row": 3
+  },
+
+  "emails": {
+    "_help": "Extra mailbox names to always treat as generic (BUSINESS E-MAIL ADDRESS column), e.g. [\"lettings\", \"valuations\"].",
+    "extra_generic_prefixes": []
+  },
+
+  "setup": {
+    "_help": "Filled in by the setup interview (/prospect setup). Your personal answers live in ~/.prospect/, never in this folder.",
+    "completed": false,
+    "completed_on": ""
+  },
+
+  "browser": {
+    "_help": "Browser used for Facebook (and optional LinkedIn) checks: built-in (Claude desktop app), chrome (Claude in Chrome) or none.",
+    "name": "none",
+    "facebook_checks": true
+  },
+
+  "linkedin": {
+    "_help": "browser_lookups: also look people up on LinkedIn in the logged-in browser when Google finds no marketing/owner contact. Off by default. daily_limit keeps volume low to protect the account.",
+    "browser_lookups": false,
+    "daily_limit": 25
+  },
+
+  "outreach": {
+    "_help": "Email writing. mode: off, draft (Gmail drafts you review and send) or send (Claude sends after you confirm each batch). daily_limit counts drafts + sends per day across all runs.",
+    "mode": "off",
+    "daily_limit": 30,
+    "only_eligibility": ["Suitable"],
+    "prefer": "named"
+  },
+
+  "sheets": {
+    "_help": "mode: manual (you import the .xlsx into Google Sheets) or connector (Claude writes each run into the Google Sheet below as new tabs; needs the Google Sheets connector).",
+    "mode": "manual",
+    "spreadsheet_url": ""
+  },
+
+  "output": {
+    "_help": "Column order for each tab. Rename/reorder freely; header_fields says what goes in each header. A header not listed in header_fields becomes an empty column.",
+    "columns_with_address": [
+      "BUSINESS NAME", "BUSINESS ADDRESS", "CONTACT NUMBER", "CONTACT NAME", "BUSINESS E-MAIL ADDRESS",
+      "CONTACT E-MAIL ADDRESS", "ACTIONS", "ADVERTISING ELIGIBILITY", "JUSTIFICATION", "NOTES", "CATEGORY",
+      "WEBSITE", "SOURCE LINKS", "AUDIT NOTES", "ROW ID"
+    ],
+    "columns_no_address": [
+      "BUSINESS NAME", "BUSINESS ADDRESS", "CLOSEST LOCATION", "CONTACT NUMBER", "CONTACT NAME",
+      "BUSINESS E-MAIL ADDRESS", "CONTACT E-MAIL ADDRESS", "ACTIONS", "ADVERTISING ELIGIBILITY", "JUSTIFICATION",
+      "NOTES", "CATEGORY", "WEBSITE", "SOURCE LINKS", "AUDIT NOTES", "ROW ID"
+    ],
+    "header_fields": {
+      "BUSINESS NAME": "business_name",
+      "BUSINESS ADDRESS": "business_address",
+      "CLOSEST LOCATION": "closest_location",
+      "CITY/TOWN": "city",
+      "CONTACT NUMBER": "phone",
+      "CONTACT NAME": "contact_name",
+      "BUSINESS E-MAIL ADDRESS": "business_emails",
+      "CONTACT E-MAIL ADDRESS": "contact_emails",
+      "ACTIONS": "actions",
+      "ADVERTISING ELIGIBILITY": "eligibility",
+      "JUSTIFICATION": "justification",
+      "NOTES": "notes",
+      "CATEGORY": "category",
+      "WEBSITE": "website",
+      "SOURCE LINKS": "source_links",
+      "AUDIT NOTES": "audit_notes",
+      "ROW ID": "row_id"
+    },
+    "email_separator": ", ",
+    "label_source_links": true,
+    "column_widths": {}
+  }
+}
